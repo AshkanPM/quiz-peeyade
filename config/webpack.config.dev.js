@@ -160,6 +160,9 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           {
             test: /\.css$/,
+            exclude: [
+              path.resolve('src/assets/sass')
+            ],
             use: ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: [
@@ -194,7 +197,42 @@ module.exports = {
             })
           },
           {
+            test: /\.css$/,
+            include: [
+              path.resolve('src/assets/sass')
+            ],
+            use: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: [
+                'css-loader',
+                {
+                  loader: require.resolve('postcss-loader'),
+                  options: {
+                    // Necessary for external CSS imports to work
+                    // https://github.com/facebookincubator/create-react-app/issues/2677
+                    ident: 'postcss',
+                    plugins: () => [
+                      require('postcss-flexbugs-fixes'),
+                      autoprefixer({
+                        browsers: [
+                          '>1%',
+                          'last 4 versions',
+                          'Firefox ESR',
+                          'not ie < 9', // React doesn't support IE8 anyway
+                        ],
+                        flexbox: 'no-2009',
+                      }),
+                    ],
+                  },
+                }
+              ]
+            })
+          },
+          {
             test: /\.scss$/,
+            exclude: [
+              path.resolve('src/assets/sass')
+            ],
             use: ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: [
@@ -205,6 +243,25 @@ module.exports = {
                     sourceMap: true,
                     importLoaders: 2,
                     localIdentName: '[name]__[local]___[hash:base64:5]'
+                  }
+                },
+                'sass-loader'
+              ]
+            })
+          },
+          {
+            test: /\.scss$/,
+            include: [
+              path.resolve('src/assets/sass')
+            ],
+            use: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: [
+                {
+                  loader: 'css-loader',
+                  options: {
+                    sourceMap: true,
+                    importLoaders: 2
                   }
                 },
                 'sass-loader'

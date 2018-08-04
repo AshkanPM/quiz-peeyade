@@ -167,6 +167,61 @@ module.exports = {
           // in the main CSS file.
           {
             test: /\.css$/,
+            exclude: [
+              path.resolve('src/assets/sass')
+            ],
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: {
+                    loader: require.resolve('style-loader'),
+                    options: {
+                      hmr: false,
+                    },
+                  },
+                  use: [
+                    {
+                      loader: require.resolve('css-loader'),
+                      options: {
+                        modules: true,
+                        importLoaders: 1,
+                        minimize: true,
+                        sourceMap: shouldUseSourceMap,
+                        localIdentName: '[name]__[local]___[hash:base64:5]'
+                      },
+                    },
+                    {
+                      loader: require.resolve('postcss-loader'),
+                      options: {
+                        // Necessary for external CSS imports to work
+                        // https://github.com/facebookincubator/create-react-app/issues/2677
+                        ident: 'postcss',
+                        plugins: () => [
+                          require('postcss-flexbugs-fixes'),
+                          autoprefixer({
+                            browsers: [
+                              '>1%',
+                              'last 4 versions',
+                              'Firefox ESR',
+                              'not ie < 9', // React doesn't support IE8 anyway
+                            ],
+                            flexbox: 'no-2009',
+                          }),
+                        ],
+                      },
+                    },
+                  ],
+                },
+                extractTextPluginOptions
+              )
+            ),
+            // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          {
+            test: /\.css$/,
+            include: [
+              path.resolve('src/assets/sass')
+            ],
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -182,7 +237,7 @@ module.exports = {
                       options: {
                         importLoaders: 1,
                         minimize: true,
-                        sourceMap: shouldUseSourceMap,
+                        sourceMap: shouldUseSourceMap
                       },
                     },
                     {
@@ -214,6 +269,9 @@ module.exports = {
           },
           {
             test: /\.scss$/,
+            exclude: [
+              path.resolve('src/assets/sass')
+            ],
             use: ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: [
@@ -224,6 +282,25 @@ module.exports = {
                     sourceMap: true,
                     importLoaders: 2,
                     localIdentName: '[name]__[local]___[hash:base64:5]'
+                  }
+                },
+                'sass-loader'
+              ]
+            })
+          },
+          {
+            test: /\.scss$/,
+            include: [
+              path.resolve('src/assets/sass')
+            ],
+            use: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: [
+                {
+                  loader: 'css-loader',
+                  options: {
+                    sourceMap: true,
+                    importLoaders: 2
                   }
                 },
                 'sass-loader'
