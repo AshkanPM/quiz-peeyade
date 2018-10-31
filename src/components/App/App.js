@@ -5,13 +5,9 @@ import Quiz from '../Quiz/Quiz'
 
 class App extends Component {
     render() {
-		fontAwesomeInit();
+		fontAwesomeInit()
 
-        return (
-			<div>
-				<Quiz />
-			</div>
-        )
+        return <Quiz />
     }
 }
 

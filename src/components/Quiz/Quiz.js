@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import styles from './Quiz.scss'
 
 import Status from './Status/Status'
-import IconButton from '../UI/IconButton/IconButton'
 import Question from './Question/Question'
 import Answers from './Answers/Answers'
+import MainMenu from './MainMenu/MainMenu'
+import IconButton from '../UI/IconButton/IconButton'
+import Modal from '../UI/Modal/Modal'
 
 class Quiz extends Component {
 
@@ -26,6 +28,9 @@ class Quiz extends Component {
 					<Answers />
 				</div>
 
+				<Modal>
+					<MainMenu />
+				</Modal>
 			</div>
 		)
 	}
