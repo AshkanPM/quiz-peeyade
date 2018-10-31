@@ -1,8 +1,12 @@
 import React from 'react'
+import styles from './IconButton.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const iconButton = () => {
+const iconButton = ({icon, onClick}) => {
 	return (
-		<p>Icon Button</p>
+		<a className={styles.icon_button} onClick={onClick}>
+			<FontAwesomeIcon icon={icon} />
+		</a>
 	)
 }
 

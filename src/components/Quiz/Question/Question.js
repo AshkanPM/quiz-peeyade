@@ -1,8 +1,13 @@
 import React from 'react'
 
-const question = () => {
+const question = ({id, question}) => {
 	return (
-		<p>Question</p>
+		<React.Fragment>
+			<span className="hint">
+				Question {id}
+			</span>
+			<h2>{question}</h2>
+		</React.Fragment>
 	)
 }
 

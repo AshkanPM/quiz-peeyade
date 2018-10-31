@@ -1,8 +1,11 @@
 import React from 'react'
+import styles from './Answer.scss'
 
-const answer = () => {
+const answer = ({answer}) => {
 	return (
-		<p>Answer</p>
+		<div className={styles.answer}>
+			{answer}
+		</div>
 	)
 }
 
