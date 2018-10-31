@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './Quiz.scss'
 import { connect } from 'react-redux'
 import { updateCorrectScore, updateIncorrectScore } from '../../actions/quizActions'
+import questionGenerator from '../../helpers/questionGenerator'
 
 import Status from './Status/Status'
 import Question from './Question/Question'
@@ -12,10 +13,21 @@ import Modal from '../UI/Modal/Modal'
 import * as quizFixtures from '../../fixtures/quiz.json'
 
 class Quiz extends Component {
+	state = {
+		questionGenerator: null,
+		currentQuestion: null
+	}
+
+	componentDidMount = () => {
+		const qG = questionGenerator(quizFixtures.quizQuestions)
+		this.setState({questionGenerator: qG})
+		setTimeout(() => {
+			this.nextQuestion()
+		}, 5000)
+	}
 
 	render = () => {
-		const {isStarted, name, score, updateCorrectScore, updateIncorrectScore} = this.props
-		
+		const {isStarted, name, updateCorrectScore, updateIncorrectScore} = this.props
 		return (
 			<div className={styles.quiz}>
 				<div className={styles.header}>
@@ -26,26 +38,29 @@ class Quiz extends Component {
 
 				<div className={styles.container}>
 					<Question
-						question={quizFixtures.quizQuestions[0]}
+						question={this.state.currentQuestion}
 						handleCorrect={updateCorrectScore}
 						handleIncorrect={updateIncorrectScore}
 					/>
 				</div>
 
 				<Modal show={!isStarted}>
-					<MainMenu />
+					<MainMenu handleQuizStart={this.nextQuestion} />
 				</Modal>
 			</div>
 		)
 	}
 
+	nextQuestion = () => {
+		const next = this.state.questionGenerator.next().value
+		this.setState({currentQuestion: next})
+	}
 }
 
 const mapStateToProps = state => {
 	return {
 		isStarted: state.quiz.isStarted,
-		name: state.quiz.name,
-		score: state.quiz.score
+		name: state.quiz.name
 	}
 }
 

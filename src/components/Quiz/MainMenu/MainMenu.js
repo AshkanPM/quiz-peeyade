@@ -8,6 +8,17 @@ class MainMenu extends Component {
 		name: ''
 	}
 
+	constructor (props) {
+		super(props)
+		this.nameInput = React.createRef()
+	}
+
+	componentDidMount = () => {
+		setTimeout(() => {
+			this.nameInput.current.focus()
+		}, 0)
+	}
+
 	render = () => {
 		return (
 			<div className={styles.main_menu}>
@@ -19,6 +30,7 @@ class MainMenu extends Component {
 					value={this.state.name}
 					onChange={this.handleChange}
 					onKeyDown={(event) => {if (event.keyCode === 13) this.handleSubmit()}}
+					ref={this.nameInput}
 				/>
 				<button onClick={this.handleSubmit}>Let's start!</button>
 			</div>
@@ -31,6 +43,7 @@ class MainMenu extends Component {
 
 	handleSubmit = () => {
 		this.props.startQuiz(this.state.name)
+		this.props.handleQuizStart()
 	}
 }
 

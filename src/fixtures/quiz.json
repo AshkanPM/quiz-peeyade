@@ -21,6 +21,28 @@
 				}
 			],
 			"correct": 3
+		},
+		{
+			"question": "What do the expressions 1 == true and 1 === true return?",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "true and false, because == performs type coercion and === does not"
+				},
+				{
+					"id": 2,
+					"answer": "false and true, because == performs type coercion and === does not"
+				},
+				{
+					"id": 3,
+					"answer": "true and false, because === performs type coercion and == does not"
+				},
+				{
+					"id": 4,
+					"answer": "false and true, because === performs type coercion and == does not"
+				}
+			],
+			"correct": 3
 		}
 	]
 }

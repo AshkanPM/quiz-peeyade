@@ -15,7 +15,7 @@ const modal = ({children, show}) => {
 	}
 
 	return (
-		<CSSTransition in={show} timeout={10000} classNames={transitionNames} appear={show}>
+		<CSSTransition in={show} timeout={300} classNames={transitionNames} appear={show}>
 			{state => (
 				<div className={styles.modal}>
 					{children}

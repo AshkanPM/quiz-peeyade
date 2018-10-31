@@ -11,10 +11,14 @@ class Question extends Component {
 	render = () => {
 		const { question } = this.props
 
+		if (question === null) {
+			return <h2>There are no questions available.</h2>
+		}
+
 		return (
 			<React.Fragment>
 				<span className="hint">
-					Question 1
+					Question {question.id}
 				</span>
 				<h2>{question.question}</h2>
 
