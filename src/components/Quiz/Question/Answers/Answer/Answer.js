@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './Answer.scss'
 
-const answer = ({answer}) => {
+const answer = ({answer, handleAnswer}) => {
 	return (
-		<div className={styles.answer}>
+		<div className={styles.answer} onClick={handleAnswer}>
 			{answer}
 		</div>
 	)

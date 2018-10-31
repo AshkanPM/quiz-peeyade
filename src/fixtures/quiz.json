@@ -1,0 +1,26 @@
+{
+	"quizQuestions": [
+		{
+			"question": "Which of the following is NOT a primitive JavaScript data type?",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "Number"
+				},
+				{
+					"id": 2,
+					"answer": "Boolean"
+				},
+				{
+					"id": 3,
+					"answer": "Text"
+				},
+				{
+					"id": 4,
+					"answer": "Undefined"
+				}
+			],
+			"correct": 3
+		}
+	]
+}

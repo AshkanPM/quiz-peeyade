@@ -12,4 +12,16 @@
 	align-items: center;
 
 	background-color: rgba(#f5f5f5, 0.95);
+	transition: opacity 0.3s ease;
+	opacity: 0;
+	visibility: hidden;
+
+	&.show {
+		opacity: 1;
+		visibility: visible;
+	}
+	&.hide {
+		opacity: 0;
+		visibility: visible;
+	}
 }
