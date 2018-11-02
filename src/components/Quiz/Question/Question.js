@@ -4,8 +4,17 @@ import Answers from './Answers/Answers'
 
 class Question extends Component {
 
-	componentDidMount = () => {
-		this.timer = setTimeout(this.timeUp, 8000)
+	state = {
+		correct: null,
+		incorrect: null
+	}
+
+	componentDidUpdate = (prevProps) => {
+		// Resets the timer whenever a valid question gets provided
+		if (prevProps.question !== this.props.question
+			&& this.props.question !== null) {
+			this.timer = setTimeout(this.timeUp, 8000)
+		}
 	}
 
 	render = () => {
@@ -22,19 +31,28 @@ class Question extends Component {
 				</span>
 				<h2>{question.question}</h2>
 
-				<Answers answers={question.answers} handleAnswer={this.handleAnswer} />
+				<Answers
+					answers={question.answers}
+					handleAnswer={this.handleAnswer}
+					correct={this.state.correct}
+					incorrect={this.state.incorrect}
+				/>
 			</React.Fragment>
 		)
 	}
 
 	timeUp = () => {
-		this.props.handleIncorrect()
+		this.handleAnswer(false)
 	}
 
 	handleAnswer = (answerId) => {
+		this.setState({correct: this.props.question.correct})
+
 		if (this.props.question.correct === answerId) {
+			this.setState({incorrect: null})
 			this.props.handleCorrect()
 		} else {
+			this.setState({incorrect: answerId})
 			this.props.handleIncorrect()
 		}
 	}

@@ -21,13 +21,11 @@ class Quiz extends Component {
 	componentDidMount = () => {
 		const qG = questionGenerator(quizFixtures.quizQuestions)
 		this.setState({questionGenerator: qG})
-		setTimeout(() => {
-			this.nextQuestion()
-		}, 5000)
 	}
 
 	render = () => {
 		const {isStarted, name, updateCorrectScore, updateIncorrectScore} = this.props
+
 		return (
 			<div className={styles.quiz}>
 				<div className={styles.header}>

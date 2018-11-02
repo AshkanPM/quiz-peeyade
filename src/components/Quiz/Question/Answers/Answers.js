@@ -3,7 +3,7 @@ import styles from './Answers.scss'
 
 import Answer from './Answer/Answer'
 
-const answers = ({answers, handleAnswer}) => {
+const answers = ({answers, handleAnswer, correct, incorrect}) => {
 	return (
 		<div className={styles.answers}>
 			{answers.map(answer => (
@@ -11,6 +11,8 @@ const answers = ({answers, handleAnswer}) => {
 					key={answer.id}
 					answer={answer.answer}
 					handleAnswer={() => {handleAnswer(answer.id)}}
+					correct={answer.id === correct}
+					incorrect={answer.id === incorrect}
 				/>
 			))}
 		</div>
