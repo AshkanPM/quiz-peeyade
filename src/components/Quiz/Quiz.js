@@ -12,10 +12,15 @@ import Modal from '../UI/Modal/Modal'
 
 import * as quizFixtures from '../../fixtures/quiz.json'
 
+const SECONDS_LIMIT = 4
+
 class Quiz extends Component {
 	state = {
 		questionGenerator: null,
-		currentQuestion: null
+		currentQuestion: null,
+		secondsRemaining: SECONDS_LIMIT,
+		correct: null,
+		incorrect: null
 	}
 
 	componentDidMount = () => {
@@ -30,15 +35,16 @@ class Quiz extends Component {
 			<div className={styles.quiz}>
 				<div className={styles.header}>
 					<IconButton icon="stop" />
-					<Status name={name} />
+					<Status name={name} secondsRemaining={this.state.secondsRemaining} />
 					<IconButton icon="redo" />
 				</div>
 
 				<div className={styles.container}>
 					<Question
 						question={this.state.currentQuestion}
-						handleCorrect={updateCorrectScore}
-						handleIncorrect={updateIncorrectScore}
+						handleAnswer={this.handleAnswer}
+						correct={this.state.correct}
+						incorrect={this.state.incorrect}
 					/>
 				</div>
 
@@ -50,8 +56,37 @@ class Quiz extends Component {
 	}
 
 	nextQuestion = () => {
+		this.timer = setInterval(() => {
+			if (this.state.secondsRemaining <= 0) {
+				this.setState({correct: this.state.currentQuestion.correct})
+				clearInterval(this.timer)
+				this.nextQuestion()
+			} else {
+				const updatedTime = this.state.secondsRemaining - 1
+				this.setState({secondsRemaining: updatedTime})
+			}
+		}, 1000)
+
+		this.setState({
+			secondsRemaining: SECONDS_LIMIT,
+			correct: null,
+			incorrect: null
+		})
 		const next = this.state.questionGenerator.next().value
 		this.setState({currentQuestion: next})
+	}
+
+	handleAnswer = (answerId) => {
+		if (this.state.currentQuestion.correct === answerId) {
+			this.props.updateCorrectScore()
+			this.setState({incorrect: null})
+		} else {
+			this.props.updateIncorrectScore()
+			this.setState({incorrect: answerId})
+		}
+
+		this.setState({correct: this.state.currentQuestion.correct})
+		this.nextQuestion()
 	}
 }
 

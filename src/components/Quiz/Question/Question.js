@@ -4,23 +4,10 @@ import Answers from './Answers/Answers'
 
 class Question extends Component {
 
-	state = {
-		correct: null,
-		incorrect: null
-	}
-
-	componentDidUpdate = (prevProps) => {
-		// Resets the timer whenever a valid question gets provided
-		if (prevProps.question !== this.props.question
-			&& this.props.question !== null) {
-			this.timer = setTimeout(this.timeUp, 8000)
-		}
-	}
-
 	render = () => {
-		const { question } = this.props
+		const { question, correct, incorrect, handleAnswer } = this.props
 
-		if (question === null) {
+		if (question === null || question === undefined) {
 			return <h2>There are no questions available.</h2>
 		}
 
@@ -33,28 +20,12 @@ class Question extends Component {
 
 				<Answers
 					answers={question.answers}
-					handleAnswer={this.handleAnswer}
-					correct={this.state.correct}
-					incorrect={this.state.incorrect}
+					handleAnswer={handleAnswer}
+					correct={correct}
+					incorrect={incorrect}
 				/>
 			</React.Fragment>
 		)
-	}
-
-	timeUp = () => {
-		this.handleAnswer(false)
-	}
-
-	handleAnswer = (answerId) => {
-		this.setState({correct: this.props.question.correct})
-
-		if (this.props.question.correct === answerId) {
-			this.setState({incorrect: null})
-			this.props.handleCorrect()
-		} else {
-			this.setState({incorrect: answerId})
-			this.props.handleIncorrect()
-		}
 	}
 }
 
