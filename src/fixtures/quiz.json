@@ -43,6 +43,182 @@
 				}
 			],
 			"correct": 3
+		},
+		{
+			"question": "In the browser, the global execution context is:",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "document"
+				},
+				{
+					"id": 2,
+					"answer": "null"
+				},
+				{
+					"id": 3,
+					"answer": "browser"
+				},
+				{
+					"id": 4,
+					"answer": "window"
+				}
+			],
+			"correct": 4
+		},
+		{
+			"question": "In JavaScript, scopes are created by:",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "If/else statements"
+				},
+				{
+					"id": 2,
+					"answer": "For loops and functions"
+				},
+				{
+					"id": 3,
+					"answer": "Functions"
+				},
+				{
+					"id": 4,
+					"answer": "If/else statements and functions"
+				}
+			],
+			"correct": 3
+		},
+		{
+			"question": "DOM events are processed when:",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "The scope chain is empty"
+				},
+				{
+					"id": 2,
+					"answer": "The execution stack is empty"
+				},
+				{
+					"id": 3,
+					"answer": "There are no other events"
+				},
+				{
+					"id": 4,
+					"answer": "There are no active closures"
+				}
+			],
+			"correct": 2
+		},
+		{
+			"question": "Why do we need the event object for handling keyboard events?",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "Because it carries the keycode property"
+				},
+				{
+					"id": 2,
+					"answer": "Because it carries the target element"
+				},
+				{
+					"id": 3,
+					"answer": "Because it allows event bubbling to happen"
+				},
+				{
+					"id": 4,
+					"answer": "Because it allows us to use event delegation"
+				}
+			],
+			"correct": 1
+		},
+		{
+			"question": "Consider object A = object B. By mutating property X on A, X on B will:",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "Remain unchanged, because A and B both hold a copy of the object"
+				},
+				{
+					"id": 2,
+					"answer": "Be mutated as well, because A and B actually point to the same object in memory"
+				},
+				{
+					"id": 3,
+					"answer": "Remain unchanged, because A and B are in different execution contexts"
+				},
+				{
+					"id": 4,
+					"answer": "Be mutated as well, because X points to both A and B"
+				}
+			],
+			"correct": 2
+		},
+		{
+			"question": "Suppose we create a new array. Why can the array use the map method?",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "Because of the scope chain"
+				},
+				{
+					"id": 2,
+					"answer": "Because that method is in a closure of all arrays"
+				},
+				{
+					"id": 3,
+					"answer": "Because of the 'this' keyword"
+				},
+				{
+					"id": 4,
+					"answer": "Because of the prototype chain"
+				}
+			],
+			"correct": 4
+		},
+		{
+			"question": "An Immediately Invoked Function Expression:",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "Is only called once"
+				},
+				{
+					"id": 2,
+					"answer": "Makes functions accessible to the outside scope"
+				},
+				{
+					"id": 3,
+					"answer": "Can’t accept arguments"
+				},
+				{
+					"id": 4,
+					"answer": "Makes use of the bind method"
+				}
+			],
+			"correct": 1
+		},
+		{
+			"question": "Which of the following methods creates a new function with preset arguments?",
+			"answers": [
+				{
+					"id": 1,
+					"answer": "Function.apply()"
+				},
+				{
+					"id": 2,
+					"answer": "Function.pre()"
+				},
+				{
+					"id": 3,
+					"answer": "Function.call()"
+				},
+				{
+					"id": 4,
+					"answer": "Function.bind()"
+				}
+			],
+			"correct": 4
 		}
 	]
 }
