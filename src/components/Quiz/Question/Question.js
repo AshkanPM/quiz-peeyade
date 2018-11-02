@@ -7,7 +7,7 @@ class Question extends Component {
 	render = () => {
 		const { question, correct, incorrect, handleAnswer, lock } = this.props
 
-		if (question === null || question === undefined) {
+		if (question === null) {
 			return <h2>There are no questions available.</h2>
 		}
 

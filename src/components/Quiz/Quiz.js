@@ -7,6 +7,7 @@ import questionGenerator from '../../helpers/questionGenerator'
 import Status from './Status/Status'
 import Question from './Question/Question'
 import MainMenu from './MainMenu/MainMenu'
+import Result from './Result/Result'
 import IconButton from '../UI/IconButton/IconButton'
 import Modal from '../UI/Modal/Modal'
 
@@ -15,16 +16,19 @@ import * as quizFixtures from '../../fixtures/quiz.json'
 const SECONDS_LIMIT = 8 // Time per each question in seconds
 const DISPLAY_TIMEOUT = 1500 // Wait in milliseconds before next question
 
+const initialState = {
+	questionGenerator: null,
+	currentQuestion: null,
+	secondsRemaining: SECONDS_LIMIT,
+	correct: null,
+	incorrect: null,
+	lock: false,
+	pause: false,
+	finished: false
+}
+
 class Quiz extends Component {
-	state = {
-		questionGenerator: null,
-		currentQuestion: null,
-		secondsRemaining: SECONDS_LIMIT,
-		correct: null,
-		incorrect: null,
-		lock: false,
-		pause: false
-	}
+	state = initialState
 
 	componentDidMount = () => {
 		const qG = questionGenerator(quizFixtures.quizQuestions)
@@ -32,7 +36,7 @@ class Quiz extends Component {
 	}
 
 	render = () => {
-		const {isStarted, name, updateCorrectScore, updateIncorrectScore, score} = this.props
+		const {isStarted, name, score} = this.props
 
 		return (
 			<div className={styles.quiz}>
@@ -54,6 +58,13 @@ class Quiz extends Component {
 
 				<Modal show={!isStarted}>
 					<MainMenu handleQuizStart={this.nextQuestion} />
+				</Modal>
+				<Modal show={this.state.finished}>
+					<Result
+						name={name}
+						score={score}
+						handleRestart={this.restartQuiz}
+					/>
 				</Modal>
 			</div>
 		)
@@ -82,6 +93,11 @@ class Quiz extends Component {
 		})
 		const next = this.state.questionGenerator.next().value
 		this.setState({currentQuestion: next})
+
+		if (next === null) {
+			clearInterval(this.timer)
+			this.setState({finished: true})
+		}
 	}
 
 	handleAnswer = (answerId) => {
@@ -99,13 +115,7 @@ class Quiz extends Component {
 	}
 
 	restartQuiz = () => {
-		this.setState({
-			questionGenerator: null,
-			currentQuestion: null,
-			correct: null,
-			incorrect: null,
-			lock: false
-		})
+		this.setState(initialState)
 		const qG = questionGenerator(quizFixtures.quizQuestions)
 		this.setState({questionGenerator: qG})
 		clearInterval(this.timer)
@@ -122,7 +132,8 @@ class Quiz extends Component {
 const mapStateToProps = state => {
 	return {
 		isStarted: state.quiz.isStarted,
-		name: state.quiz.name
+		name: state.quiz.name,
+		score: state.quiz.score
 	}
 }
 

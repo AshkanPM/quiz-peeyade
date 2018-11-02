@@ -3,6 +3,8 @@ const questionGenerator = function * (questions) {
 		const id = questions.indexOf(question) + 1
 		yield({...question, id: id})
 	}
+
+	yield(null)
 }
 
 export default questionGenerator

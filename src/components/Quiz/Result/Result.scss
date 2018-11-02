@@ -1,0 +1,31 @@
+.result {
+	color: #777;
+
+	h1 {
+		margin-bottom: 1.5rem;
+	}
+	h2 {
+		margin-bottom: 0.5rem;
+	}
+	button {
+		width: 100%;
+	    padding-top: 12px;
+	    padding-bottom: 10px;
+	    background: none;
+	    border: 1px solid #3488a5;
+		color: #3488a5;
+	    font-size: 1rem;
+	    border-radius: 3px;
+		transition: all 0.3s ease;
+
+		&:hover {
+			cursor: pointer;
+			background-color: #3488a5;
+			border-color: #3488a5;
+			color: #f5f5f5;
+		}
+		&:focus {
+			outline: none;
+		}
+	}
+}
