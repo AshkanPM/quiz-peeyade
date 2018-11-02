@@ -1,4 +1,5 @@
 export const START_QUIZ = 'START_GAME'
+export const RESTART_QUIZ = 'RESTART_QUIZ'
 export const CORRECT_SCORE = 'CORRECT_SCORE'
 export const INCORRECT_SCORE = 'INCORRECT_SCORE'
 
@@ -9,6 +10,12 @@ export const startQuiz = (name) => {
 			isStarted: true,
 			name: name
 		}
+	}
+}
+
+export const restartQuiz = () => {
+	return {
+		type: RESTART_QUIZ
 	}
 }
 

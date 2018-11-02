@@ -1,17 +1,22 @@
 import React from 'react'
 import styles from './Answer.scss'
 
-const answer = ({answer, handleAnswer, correct, incorrect}) => {
-	const classList = [
-		styles.answer,
-		correct ? styles.correct : '',
-		incorrect ? styles.incorrect : '',
-	].join(' ')
+const answer = ({answer, handleAnswer, correct, incorrect, lock}) => {
+	let answerStatus = ''
+	if (correct) {
+		answerStatus = styles.correct
+	} else if (incorrect) {
+		answerStatus = styles.incorrect
+	} else if (lock) {
+		answerStatus = styles.lock
+	}
+	
+	const clicked = !lock ? handleAnswer : null;
 
 	return (
 		<div
-			className={classList}
-			onClick={handleAnswer}>
+			className={[styles.answer, answerStatus].join(' ')}
+			onClick={clicked}>
 			{answer}
 		</div>
 	)

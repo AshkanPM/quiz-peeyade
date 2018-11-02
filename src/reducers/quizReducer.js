@@ -1,4 +1,4 @@
-import { START_QUIZ, CORRECT_SCORE, INCORRECT_SCORE } from '../actions/quizActions'
+import { START_QUIZ, RESTART_QUIZ, CORRECT_SCORE, INCORRECT_SCORE } from '../actions/quizActions'
 
 const initialState = {
 	isStarted: false,
@@ -9,7 +9,9 @@ const initialState = {
 const quizReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case START_QUIZ:
-			return {...state, ...action.payload}
+			return {...initialState, ...action.payload}
+		case RESTART_QUIZ:
+			return {...initialState}
 		case CORRECT_SCORE:
 			return {...state, score: state.score + action.payload.correctScore}
 		case INCORRECT_SCORE:

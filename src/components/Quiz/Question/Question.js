@@ -5,7 +5,7 @@ import Answers from './Answers/Answers'
 class Question extends Component {
 
 	render = () => {
-		const { question, correct, incorrect, handleAnswer } = this.props
+		const { question, correct, incorrect, handleAnswer, lock } = this.props
 
 		if (question === null || question === undefined) {
 			return <h2>There are no questions available.</h2>
@@ -23,6 +23,7 @@ class Question extends Component {
 					handleAnswer={handleAnswer}
 					correct={correct}
 					incorrect={incorrect}
+					lock={lock}
 				/>
 			</React.Fragment>
 		)
